@@ -1,5 +1,6 @@
 #!/bin/bash
-#Lista de message
+#Funciona para la descarga de logs de los MP 
+#Lista de message para la conexion
 MP[1]='10.53.58.105'
 MP[2]='10.53.58.106'
 MP[3]='10.53.58.107'
@@ -30,59 +31,59 @@ MP[27]='10.80.122.128'
 MP[28]='10.80.122.129'
 MP[29]='10.80.122.130'
 
-#Menu para la lectura de campos
-echo "============================================"
-echo "            Descarga Logs                   "
-echo "============================================"
-echo ""
-echo -n "Ambiente (prod-int / prod-ext): "
-read Ambiente
-echo -n "Api: "
-read Api
-echo -n "Revision: "
-read Revision
-echo -n "Fecha (aaaa-mm-dd): "
-read Fecha
-echo ""
-Api=`echo $Api | tr -d [:blank:]`
-Revision=`echo $Revision | tr -d [:blank:]`
-Ambiente=`echo $Ambiente | tr -d [:blank:]`
-Fecha=`echo $Fecha | tr -d [:blank:]`
-Ruta=/opt/apigee/var/log/edge-message-processor/messagelogging/baz-prod/$Ambiente/$Api/$Revision
 
-#Validamos la ruta antes de la descarga de logs
+#Funcion para la validacion de la ruta antes de la descarga
 valida_ruta(){
     echo `sshpass -p "operacionesCLOUD" ssh  -o "StrictHostKeyChecking=no" b1014515@$1 "if test -d $Ruta; then echo "OK"; fi"` 
 }
 
-#Comando para la descarga de logs
+#Funcion para la descarga de logs
 Descarga_Logs(){
     sshpass -p "operacionesCLOUD" ssh -o "StrictHostKeyChecking=no" b1014515@$1 "cat $Ruta/ML-Logging-Archivo-Error/* | egrep -A6 $Fecha" > ./LogsDescargos_$Api/Logs_Error_$Ambiente\_$Fecha\_$1.txt
     sshpass -p "operacionesCLOUD" ssh -o "StrictHostKeyChecking=no" b1014515@$1 "cat $Ruta/ML-Logging-Archivo-Info/* | egrep -A6 $Fecha" > ./LogsDescargos_$Api/Logs_Info_$Ambiente\_$Fecha\_$1.txt
 }
 
-#Creacion de directorio donde se alojan los logs
-Crea_Dir(){
-    if test -d ./LogsDescargos_$Api/
-    then
-        rm -rf LogsDescargos_$Api/*
-    else
-        mkdir  LogsDescargos_$Api
-    fi
-}
-
-main (){
+#Funcion para la lectura del arreglo
+Read_Array(){
     for i in `seq  1 ${#MP[@]}`
     do
-        echo "Conexion ${MP[$i]}"
+        echo "=============================="
+        echo "   Conexion ${MP[$i]}"
+        echo "=============================="
+        echo ""
         if [ `valida_ruta "${MP[$i]}"` ]
         then
             Descarga_Logs "${MP[$i]}"
         else
-            echo  "Valida la ruta: $Ruta"
+            echo ""
+            echo "Valida la ruta: $Ruta"
+            echo ""
         fi 
     done
 }
 
-Crea_Dir
+#Menu principal e interactivo
+main (){
+    echo "============================================"
+    echo "             Descarga Logs                  "
+    echo "============================================"
+    echo ""
+    echo -n "Ambiente (prod-int / prod-ext): "
+    read Ambiente
+    echo -n "Api: "
+    read Api
+    echo -n "Revision: "
+    read Revision
+    echo -n "Fecha (aaaa-mm-dd): "
+    read Fecha
+    echo ""
+    Api=`echo $Api | tr -d [:blank:]`
+    Revision=`echo $Revision | tr -d [:blank:]`
+    Ambiente=`echo $Ambiente | tr -d [:blank:]`
+    Fecha=`echo $Fecha | tr -d [:blank:]`
+    Ruta=/opt/apigee/var/log/edge-message-processor/messagelogging/baz-prod/$Ambiente/$Api/$Revision 
+    rm -rf ./LogsDescargos_$Api/
+    mkdir ./LogsDescargos_$Api/
+    Read_Array
+}
 main

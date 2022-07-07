@@ -1,3 +1,5 @@
+#Realiza el cambio de la imagen de Red Unica con interfaz en python
+#Verificado
 from tkinter import *
 import tkinter as tk
 import os.path, os

@@ -1,4 +1,6 @@
-#!/bin/bash 
+#!/bin/bash
+#Realiza el cambio de imagen de Red Unica
+#Verificado
 echo ""
 echo "=================================================="
 echo "                   RED UNICA                      "
@@ -21,6 +23,9 @@ echo "Subiendo en produccion"
 echo "----------------------------------------------"
 docker push $prod
 echo ""
+echo "=============================================="
 echo "Imagen en Desarrollo: $dev"
 echo "Imagen en Produccion: $prod"
+echo "=============================================="
 echo ""
+docker rmi -f $prod $dev

@@ -1,4 +1,6 @@
 #!/bin/bash
+#Realiza pruebas deconexion por nc mediand el ssh
+#Verificado
 > Salida_Nutanix_zonaB.txt
 for i in `cat ./NODOS.txt`
 do

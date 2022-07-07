@@ -1,7 +1,9 @@
 #==================================================
 #           Compara dos cadena largas 
 #==================================================
-
+#Con script se realiza la comparacion de dos cadenas
+#verifica posicion por posicion las cadenas
+#Verificado
 doc1=open("llaveOriginal")#Colocar archvio en una linea
 doc2=open("llaveCopia")#Colocar archivo en una linea
 var1=doc1.read().rstrip('\n')
