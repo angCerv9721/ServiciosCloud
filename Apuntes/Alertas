@@ -1,0 +1,157 @@
+================================
+Alerta por conexion TCP
+================================
+Cunado el error es de TCP conexiones, tiene que ver con rl servicio snmpd
+    systemctl status snmpd
+    systemctl restart snmpd
+    systemctl status snmpd
+
+================================
+Alertas por ping
+================================
+No se alcanza el sevidor por ping, corremos el siguiente comando que habilita el ping
+    sysctl -w net.ipv4.icmp_echo_ignore_all=0
+
+
+================================
+Alarma /var/lib/docker
+================================
+Comandos para la depuracion y la verificacion de ruta
+    df -h | head  Verificamos la ruta
+    du -sh * | sort -n  Lista en peso (kb)
+    du -sk * | sort -n  Lista en peso (Gb)
+
+    find /var/lib/docker/containers/ -type f -size +1G -name "*.log" -exec ls -lh {} \;
+    find /var/lib/docker/containers/ -type f -size +1G -name "*.log" -exec truncate -s 0 {} \;
+
+===============================
+Problemas en el Postgres
+===============================
+1. Detenemos el servicio para poder limpiar
+    /opt/apigee/apigee-service/bin/apigee-service edge-postgres-server stop
+    /opt/apigee/apigee-service/bin/apigee-service apigee-postgresql stop
+
+2. Verificamos el estado para ver que es funcionando correctamente
+    /opt/apigee/apigee-service/bin/apigee-all status
+    /opt/apigee/apigee-service/bin/apigee-service apigee-postgresql status
+    /opt/apigee/apigee-service/bin/apigee-service edge-postgres-server status
+
+3. Claremos el archivo
+    > postgresql.log
+
+4. Levantamos servicio en el siguiente orden
+    /opt/apigee/apigee-service/bin/apigee-service edge-postgres-server start
+    /opt/apigee/apigee-service/bin/apigee-service apigee-postgresql start
+
+5. Verificamos estado 
+    /opt/apigee/apigee-service/bin/apigee-all status
+    /opt/apigee/apigee-service/bin/apigee-service apigee-postgresql status
+    /opt/apigee/apigee-service/bin/apigee-service edge-postgres-server status
+
+Nota: El servicios se detiene cuando estamos en el directorio data. Si estamos posicionados en algún directorio los y encontramos el archivo postgresql.log, no es necesario parar el servicio, basta con realizar un clareo > postgresql.log
+
+
+===============================
+Liberacion de disco qpid
+===============================
+Ruta: /opt/apigee/var/log/edge-qpid-server
+
+En el dia no se puede detener el servicio, por lo que basta con clarear 
+    > edge-qpid-server.log
+    tail -f edge-qpid-server.log 
+
+En la noche lo indicado es detenmer el servicio y proceder a hacer un clareo
+
+    /opt/apigee/apigee-service/bin/apigee-service edge-qpid-server stop
+    > edge-qpid-server.log
+    /opt/apigee/apigee-service/bin/apigee-service edge-qpid-server start\
+    /opt/apigee/apigee-service/bin/apigee-service edge-qpid-server status
+    tail -f edge-qpid-server.log
+
+
+===============================
+Liberacion de disco nginex
+===============================
+Ruta: /opt/apigee/var/log/edge-router/nginx
+
+1. Identificacion del archivo: baz-prod~prod-ext.9004_access_log
+
+2. Se necesita comprimir el archivo
+    tar -czf Archivo.tgz Archivo
+
+3. Se realiza clareo del archivo
+    > baz-prod~prod-ext.9004_access_log
+
+4. Verificamos que siga escribiendo 
+    tail -f baz-prod~prod-ext.9004_access_log
+
+Nota: Para las liberaciones de disco que son en ../var/log/ poodemos hacer el clareo
+pero si nos encontramos en data entocnes es mejor detener el servicio y posteriormente
+hacer el clareado
+
+===============================
+Liberacion de disco mesage
+===============================
+Ruta: /opt/apigee/var/log/edge-message-processor
+
+1. Identificacion del archivo: edge-message-processor.log
+
+2. Se necesita comprimir el archivo
+    tar -czf Archivo.tgz Archivo
+
+3. La depuracion en el dia 
+    > edge-message-processor.log
+    tail -f edge-message-processor.log
+
+4. La depuracion en la noche
+    /opt/apigee/apigee-service/bin/apigee-service edge-message-processor stop
+    /opt/apigee/apigee-service/bin/apigee-service edge-router stop
+    tar -czf
+    > edge-message-processor.log
+    /opt/apigee/apigee-service/bin/apigee-service edge-message-processor start
+    /opt/apigee/apigee-service/bin/apigee-service edge-router start 
+    tail -f edge-message-processor.log
+
+===============================
+Liberacion de disco en pgdata
+===============================
+    /opt/apigee/apigee-service/bin/apigee-service apigee-postgresql pg-data-purge baz-prod prod-int 45
+    /opt/apigee/apigee-service/bin/apigee-service apigee-postgresql pg-data-purge baz-prod prod-ext 45
+El numerop 45 indica los dias 
+
+===============================
+Liberacion de memoria
+===============================
+    sync; echo 1 > /proc/sys/vm/drop_caches
+    sync; echo 3 > /proc/sys/vm/drop_caches
+
+    free -h; sync; echo 3 > /proc/sys/vm/drop_caches; free -h
+
+===============================
+Liberacion de disco
+===============================
+    Validacion de espacio: df -h
+
+    Validacion depeso de archivos
+    du -sk * | sort -n
+    du -sh * | sort -n
+
+
+===============================
+Liberacion de disco en PCP
+===============================
+Ruta: /var/log/pcp/pmlogger
+
+Adentro se encuentra metricas, necesimos borrar los arcivos mas antiguos
+    rm -rf *.index
+    rm -rf *.meta
+
+
+===============================
+Liberacion en maildrop
+===============================
+Se borran todos los archivos que tienen mas tiempo
+
+
+
+

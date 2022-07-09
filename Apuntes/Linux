@@ -1,0 +1,56 @@
+================================
+        Comandos Linux
+================================
+
+/etc/resolv.conf    #Direectotio que contiene los DNS
+/etc/chrony.conf    #Archivo que contiene las IP de sincronizacion de reloj
+lsblk               #Me lista todas la particiones que tengo
+lvdisplay           #Me lista las particiones de tipo LVM
+lvscan              #Me lista las particiones de tipo LVM en forma reducida
+
+Sintaxis Hostname: lv_hostname_disco
+
+#Comando para clonar un disco
+    dd if=Origen of=Destino bs=5M status=progress
+    
+    bs: Velocidad con la que se clona, afecta al CPU si pongo mucha
+    status: Vista del ptogreso de copia
+
+Nota: Asegurad la ruta origen y destino, ya que el comando
+forza la clonacion, podira darle a la raiz y llevarme todo
+lo que contenga
+
+
+#Configuracion de direccion IP
+    Comando: ifconfig
+    Archivo: /etc/sysconfig/network-Scripts
+    Comando: nmtui
+    Actualizacion: systemctl restart network 
+    Actualizacion: ifup eth0
+
+#Funciones para el esacaneo de puerto
+    netstat    
+    netstat -an |egrep 'ESTABLISHED' | awk '{print $5}' | cut -d ":" -f2 | sort -n| uniq
+    netstat -ln |egrep ' LISTEN ' | awk '{print $4}' | cut -d ":" -f2 | sort -n| uniq
+
+    ss -tulpan | grep -i ' LISTEN '   #Es una alternativa al netstat 
+
+    ps aux --width 30 --sort -rss | head             #Comando para ver los procesos que estan consumiendo maas memoria 
+    watch -n 3 'ps -fea | grep apigee'               #Con el wath le indico que hara un comando cada cierto tiempo
+    ps h -Led -o user | sort | uniq -c | sort -n     #Ves el numero de procesos que tiene un usuario
+
+#Limpiar memoria 
+    free -h; sync; echo 3 > /proc/sys/vm/drop_caches; free -h
+
+#Sustiruir espacion por solo uno 
+    tr -s '[:blank:]'  " "
+
+#Convertir en tar
+    tar -czf archivo.tgz achivo 
+
+#Descomprimir un tar
+    tar -xzf archivo.tgz
+
+#Comprimir zip con passwd
+    zip -er archivo.zip archivo
+

@@ -1,0 +1,14 @@
+Conectando con el host: 
+spawn ssh -o StrictHostKeyChecking=no 1037337@root@@10.64.248.31
+1037337@root@@10.64.248.31's password: 
+PSPSD037E Parameter cannot be empty.
+PSM SSH Proxy usage:
+
+<ssh client> [-t] [-i private_key_file] vaultuser@targetuser#domainaddress@targetmachine#targetport@targetpassword@proxyaddress [command]
+
+To copy files to a target machine:
+"scp [options] <source-path> vaultuser@targetuser#domainaddress@targetmachine#targetport@targetpassword@proxyaddress:<destination-path>"
+To copy files from a target machine:
+"scp [options] vaultuser@targetuser#domainaddress@targetmachine#targetport@targetpassword@proxyaddress:<source-path> <destination-path>"
+Connection to 10.64.248.31 closed.
+Fin de la conexión con el host: 
