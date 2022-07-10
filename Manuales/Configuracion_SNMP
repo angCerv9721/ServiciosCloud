@@ -1,0 +1,153 @@
+=============================================================
+                Configuracion del SNMPD
+=============================================================
+1. Configuracion en el archivo: cat /etc/snmp/snmpd.conf 
+Agregar las lineas
+    # sec.name source community
+    com2sec local localhost MONITOREO
+    com2sec redmonbaz34 10.53.34.0/24 MONITOREO
+    com2sec redmonbaz80 10.80.204.0/24 MONITOREO
+    com2sec redmonbaz82 10.82.16.0/24 MONITOREO
+    com2sec redmonbaz128 10.228.128.0/24 MONITOREO
+    com2sec redmonbaz208 10.82.208.0/24 MONITOREO
+    com2sec redcmaskio48 10.81.48.0/24 monitoreocmas
+    com2sec redcmasins34 10.20.34.0/24 monitoreocmas
+    com2sec redcmastva44 10.20.44.0/24 monitoreocmas
+    # groupName securityModel securityName
+    group MyRWGroup v1 local
+    group MyRWGroup v2c local
+    group MyRWGroup usm local
+    group GpoMonBAZ34 v1 redmonbaz34
+    group GpoMonBAZ34 v2c redmonbaz34
+    group GpoMonBAZ34 usm redmonbaz34
+    group GpoMonBAZ80 v1 redmonbaz80
+    group GpoMonBAZ80 v2c redmonbaz80
+    group GpoMonBAZ80 usm redmonbaz80
+    group GpoMonBAZ82 v1 redmonbaz82
+    group GpoMonBAZ82 v2c redmonbaz82
+    group GpoMonBAZ82 usm redmonbaz82
+    group GpoMonBAZ128 v1 redmonbaz128
+    group GpoMonBAZ128 v2c redmonbaz128
+    group GpoMonBAZ128 usm redmonbaz128
+    group GpoMonBAZ208 v1 redmonbaz208
+    group GpoMonBAZ208 v2c redmonbaz208
+    group GpoMonBAZ208 usm redmonbaz208
+    group GpoMoncmaskio48 v1 redmonbaz48
+    group GpoMoncmaskio48 v2c redmonbaz48
+    group GpoMoncmaskio48 usm redmonbaz48
+    group GpoMoncmaskio34 v1 redmonbaz34
+    group GpoMoncmaskio34 v2c redmonbaz34
+    group GpoMoncmaskio34 usm redmonbaz34
+    group GpoMoncmaskio44 v1 redmonbaz44
+    group GpoMoncmaskio44 v2c redmonbaz44
+    group GpoMoncmaskio44 usm redmonbaz44
+    #name incl/excl subtree mask(optional)
+    view all included .1
+    # group context sec.model sec.level prefix read write notif
+    access MyRWGroup "" any noauth exact all all all
+    access GpoMonBAZ34 "" any noauth exact all none none
+    access GpoMonBAZ80 "" any noauth exact all none none
+    access GpoMonBAZ82 "" any noauth exact all none none
+    access GpoMonBAZ128 "" any noauth exact all none none
+    access GpoMonBAZ208 "" any noauth exact all none none
+    access GpoMonBAZ48 "" any noauth exact all none none
+    access GpoMonBAZ34 "" any noauth exact all none none
+    access GpoMonBAZ44 "" any noauth exact all none none
+
+
+2. Agregar las siguientes IP al Firewalld 
+    10.53.34.101
+    10.53.34.102
+    10.53.34.103
+    10.53.34.104
+    10.53.34.105
+    10.53.34.106
+    10.53.34.107
+    10.53.34.108
+    10.53.34.109
+    10.53.34.110
+    10.53.34.111
+    10.53.34.112
+    10.53.34.113
+    10.53.34.114
+    10.53.34.115
+    10.53.34.116
+    10.53.34.117
+    10.53.34.118
+    10.53.34.119
+    10.53.34.120
+    10.53.34.121
+    10.53.34.122
+    10.53.34.123
+    10.53.34.189
+    10.53.34.190
+    10.53.34.215
+    10.53.34.216
+    10.53.34.49
+    10.53.34.53
+    10.53.34.54
+    10.53.34.58
+    10.53.34.59
+    10.53.34.61
+    10.53.34.62
+    10.53.34.63
+    10.53.34.64
+    10.53.34.65
+    10.53.34.66
+    10.53.34.67
+    10.53.34.68
+    10.53.34.69
+    10.53.34.70
+    10.53.34.71
+    10.53.34.72
+    10.53.34.85
+    10.53.34.86
+    10.53.34.87
+    10.53.34.139
+    10.53.34.140
+    10.53.34.141
+    10.53.34.142
+    10.53.34.143
+    10.53.34.144
+    10.53.34.145
+    10.53.34.146
+    10.63.100.152
+    10.63.25.62
+    10.63.50.74
+    10.63.50.79
+    10.80.204.122
+    10.80.204.124
+    10.80.204.127
+    10.80.204.128
+    10.80.204.147
+    10.80.204.148
+    10.80.204.192
+    10.80.204.193
+    10.80.204.194
+    10.80.204.195
+    10.80.204.196
+    10.80.204.197
+    10.80.204.68
+    10.80.204.69
+    10.80.204.70
+    10.80.204.71
+    10.80.204.72
+    10.80.204.73
+    10.80.204.74
+    10.80.204.75
+    10.80.204.76
+    10.80.204.77
+    10.80.204.78
+    10.80.204.79
+
+Puertos
+    ICMP
+    161 UDP
+    162 UDP
+    22 SSH
+
+
+3. Configuracion del Usuario de monitoreo: scom
+    groupadd -g 1002 scom
+    useaddr -m scom -c "Usuario Monitoreo PRTG" -u 802 -g 1002
+    passwd: MonAplica2009CO
