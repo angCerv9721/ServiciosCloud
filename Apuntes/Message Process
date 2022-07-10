@@ -1,0 +1,68 @@
+===================================================
+                    Message Process
+===================================================
+         Message CDMX                        Message KIO
+mxroumesapigee01  10.53.58.105    kioroumesapigee01  10.80.122.116
+mxroumesapigee02  10.53.58.106    kioroumesapigee01  10.80.122.117    
+mxroumesapigee03  10.53.58.107    kioroumesapigee01  10.80.122.118
+mxroumesapigee04  10.53.58.108    kioroumesapigee01  10.80.122.119
+mxroumesapigee05  10.53.58.109    kioroumesapigee01  10.80.122.120
+mxroumesapigee06  10.53.58.110    kioroumesapigee01  10.80.122.121
+mxroumesapigee07  10.53.58.111    kioroumesapigee01  10.80.122.122
+mxroumesapigee08  10.53.58.112    kioroumesapigee01  10.80.122.123
+mxroumesapigee09  10.53.58.113    kioroumesapigee01  10.80.122.124
+mxroumesapigee10  10.53.58.114    kioroumesapigee01  10.80.122.125
+mxroumesapigee11  10.53.58.115    kioroumesapigee01  10.80.122.126
+mxroumesapigee12  10.53.58.116    kioroumesapigee01  10.80.122.127
+mxroumesapigee13  10.53.58.117    kioroumesapigee01  10.80.122.128
+mxroumesapigee14  10.53.58.118    kioroumesapigee01  10.80.122.129
+mxroumesapigee15  10.53.58.119    kioroumesapigee01  10.80.122.130
+
+Comando de validacion
+    /opt/apigee/apigee-service/bin/apigee-all restart
+    /opt/apigee/apigee-service/bin/apigee-all stop
+    /opt/apigee/apigee-service/bin/apigee-all start
+    /opt/apigee/apigee-service/bin/apigee-all status
+
+Curl de validacion CDMX
+    curl --noproxy "*" -k -u XEy1CtmrLRBSoIO4yvpJoUIotW4ZTUWx:SXGR2xIrRdnfYlEO --header "X-Apigee.Host: prod-api.bancoazteca.com:9001" 'https://10.53.58.105:8443/oauth2/v1/token?grant_type=client_credentials' -H 'Content-Type: application/x-www-form-urlencoded' -d 'grant_type=client_credentials'
+    curl --noproxy "*" -k -u XEy1CtmrLRBSoIO4yvpJoUIotW4ZTUWx:SXGR2xIrRdnfYlEO --header "X-Apigee.Host: prod-api.bancoazteca.com:9001" 'https://10.53.58.106:8443/oauth2/v1/token?grant_type=client_credentials' -H 'Content-Type: application/x-www-form-urlencoded' -d 'grant_type=client_credentials'
+    curl --noproxy "*" -k -u XEy1CtmrLRBSoIO4yvpJoUIotW4ZTUWx:SXGR2xIrRdnfYlEO --header "X-Apigee.Host: prod-api.bancoazteca.com:9001" 'https://10.53.58.107:8443/oauth2/v1/token?grant_type=client_credentials' -H 'Content-Type: application/x-www-form-urlencoded' -d 'grant_type=client_credentials'
+    curl --noproxy "*" -k -u XEy1CtmrLRBSoIO4yvpJoUIotW4ZTUWx:SXGR2xIrRdnfYlEO --header "X-Apigee.Host: prod-api.bancoazteca.com:9001" 'https://10.53.58.108:8443/oauth2/v1/token?grant_type=client_credentials' -H 'Content-Type: application/x-www-form-urlencoded' -d 'grant_type=client_credentials'
+    curl --noproxy "*" -k -u XEy1CtmrLRBSoIO4yvpJoUIotW4ZTUWx:SXGR2xIrRdnfYlEO --header "X-Apigee.Host: prod-api.bancoazteca.com:9001" 'https://10.53.58.109:8443/oauth2/v1/token?grant_type=client_credentials' -H 'Content-Type: application/x-www-form-urlencoded' -d 'grant_type=client_credentials'
+    curl --noproxy "*" -k -u XEy1CtmrLRBSoIO4yvpJoUIotW4ZTUWx:SXGR2xIrRdnfYlEO --header "X-Apigee.Host: prod-api.bancoazteca.com:9001" 'https://10.53.58.110:8443/oauth2/v1/token?grant_type=client_credentials' -H 'Content-Type: application/x-www-form-urlencoded' -d 'grant_type=client_credentials'
+    curl --noproxy "*" -k -u XEy1CtmrLRBSoIO4yvpJoUIotW4ZTUWx:SXGR2xIrRdnfYlEO --header "X-Apigee.Host: prod-api.bancoazteca.com:9001" 'https://10.53.58.111:8443/oauth2/v1/token?grant_type=client_credentials' -H 'Content-Type: application/x-www-form-urlencoded' -d 'grant_type=client_credentials'
+    curl --noproxy "*" -k -u XEy1CtmrLRBSoIO4yvpJoUIotW4ZTUWx:SXGR2xIrRdnfYlEO --header "X-Apigee.Host: prod-api.bancoazteca.com:9001" 'https://10.53.58.112:8443/oauth2/v1/token?grant_type=client_credentials' -H 'Content-Type: application/x-www-form-urlencoded' -d 'grant_type=client_credentials'
+    curl --noproxy "*" -k -u XEy1CtmrLRBSoIO4yvpJoUIotW4ZTUWx:SXGR2xIrRdnfYlEO --header "X-Apigee.Host: prod-api.bancoazteca.com:9001" 'https://10.53.58.113:8443/oauth2/v1/token?grant_type=client_credentials' -H 'Content-Type: application/x-www-form-urlencoded' -d 'grant_type=client_credentials'
+    curl --noproxy "*" -k -u XEy1CtmrLRBSoIO4yvpJoUIotW4ZTUWx:SXGR2xIrRdnfYlEO --header "X-Apigee.Host: prod-api.bancoazteca.com:9001" 'https://10.53.58.114:8443/oauth2/v1/token?grant_type=client_credentials' -H 'Content-Type: application/x-www-form-urlencoded' -d 'grant_type=client_credentials'
+    curl --noproxy "*" -k -u XEy1CtmrLRBSoIO4yvpJoUIotW4ZTUWx:SXGR2xIrRdnfYlEO --header "X-Apigee.Host: prod-api.bancoazteca.com:9001" 'https://10.53.58.115:8443/oauth2/v1/token?grant_type=client_credentials' -H 'Content-Type: application/x-www-form-urlencoded' -d 'grant_type=client_credentials'
+    curl --noproxy "*" -k -u XEy1CtmrLRBSoIO4yvpJoUIotW4ZTUWx:SXGR2xIrRdnfYlEO --header "X-Apigee.Host: prod-api.bancoazteca.com:9001" 'https://10.53.58.116:8443/oauth2/v1/token?grant_type=client_credentials' -H 'Content-Type: application/x-www-form-urlencoded' -d 'grant_type=client_credentials'
+    curl --noproxy "*" -k -u XEy1CtmrLRBSoIO4yvpJoUIotW4ZTUWx:SXGR2xIrRdnfYlEO --header "X-Apigee.Host: prod-api.bancoazteca.com:9001" 'https://10.53.58.117:8443/oauth2/v1/token?grant_type=client_credentials' -H 'Content-Type: application/x-www-form-urlencoded' -d 'grant_type=client_credentials'
+    curl --noproxy "*" -k -u XEy1CtmrLRBSoIO4yvpJoUIotW4ZTUWx:SXGR2xIrRdnfYlEO --header "X-Apigee.Host: prod-api.bancoazteca.com:9001" 'https://10.53.58.118:8443/oauth2/v1/token?grant_type=client_credentials' -H 'Content-Type: application/x-www-form-urlencoded' -d 'grant_type=client_credentials'
+    curl --noproxy "*" -k -u XEy1CtmrLRBSoIO4yvpJoUIotW4ZTUWx:SXGR2xIrRdnfYlEO --header "X-Apigee.Host: prod-api.bancoazteca.com:9001" 'https://10.53.58.119:8443/oauth2/v1/token?grant_type=client_credentials' -H 'Content-Type: application/x-www-form-urlencoded' -d 'grant_type=client_credentials'
+
+Curl de validacion KIO
+    curl --noproxy "*" -k -u XEy1CtmrLRBSoIO4yvpJoUIotW4ZTUWx:SXGR2xIrRdnfYlEO --header "X-Apigee.Host: prod-api.bancoazteca.com:9001" 'https://10.80.122.116:8443/oauth2/v1/token?grant_type=client_credentials' -H 'Content-Type: application/x-www-form-urlencoded' -d 'grant_type=client_credentials'
+    curl --noproxy "*" -k -u XEy1CtmrLRBSoIO4yvpJoUIotW4ZTUWx:SXGR2xIrRdnfYlEO --header "X-Apigee.Host: prod-api.bancoazteca.com:9001" 'https://10.80.122.117:8443/oauth2/v1/token?grant_type=client_credentials' -H 'Content-Type: application/x-www-form-urlencoded' -d 'grant_type=client_credentials'
+    curl --noproxy "*" -k -u XEy1CtmrLRBSoIO4yvpJoUIotW4ZTUWx:SXGR2xIrRdnfYlEO --header "X-Apigee.Host: prod-api.bancoazteca.com:9001" 'https://10.80.122.118:8443/oauth2/v1/token?grant_type=client_credentials' -H 'Content-Type: application/x-www-form-urlencoded' -d 'grant_type=client_credentials'
+    curl --noproxy "*" -k -u XEy1CtmrLRBSoIO4yvpJoUIotW4ZTUWx:SXGR2xIrRdnfYlEO --header "X-Apigee.Host: prod-api.bancoazteca.com:9001" 'https://10.80.122.119:8443/oauth2/v1/token?grant_type=client_credentials' -H 'Content-Type: application/x-www-form-urlencoded' -d 'grant_type=client_credentials'
+    curl --noproxy "*" -k -u XEy1CtmrLRBSoIO4yvpJoUIotW4ZTUWx:SXGR2xIrRdnfYlEO --header "X-Apigee.Host: prod-api.bancoazteca.com:9001" 'https://10.80.122.120:8443/oauth2/v1/token?grant_type=client_credentials' -H 'Content-Type: application/x-www-form-urlencoded' -d 'grant_type=client_credentials'
+    curl --noproxy "*" -k -u XEy1CtmrLRBSoIO4yvpJoUIotW4ZTUWx:SXGR2xIrRdnfYlEO --header "X-Apigee.Host: prod-api.bancoazteca.com:9001" 'https://10.80.122.121:8443/oauth2/v1/token?grant_type=client_credentials' -H 'Content-Type: application/x-www-form-urlencoded' -d 'grant_type=client_credentials'
+    curl --noproxy "*" -k -u XEy1CtmrLRBSoIO4yvpJoUIotW4ZTUWx:SXGR2xIrRdnfYlEO --header "X-Apigee.Host: prod-api.bancoazteca.com:9001" 'https://10.80.122.122:8443/oauth2/v1/token?grant_type=client_credentials' -H 'Content-Type: application/x-www-form-urlencoded' -d 'grant_type=client_credentials'
+    curl --noproxy "*" -k -u XEy1CtmrLRBSoIO4yvpJoUIotW4ZTUWx:SXGR2xIrRdnfYlEO --header "X-Apigee.Host: prod-api.bancoazteca.com:9001" 'https://10.80.122.123:8443/oauth2/v1/token?grant_type=client_credentials' -H 'Content-Type: application/x-www-form-urlencoded' -d 'grant_type=client_credentials'
+    curl --noproxy "*" -k -u XEy1CtmrLRBSoIO4yvpJoUIotW4ZTUWx:SXGR2xIrRdnfYlEO --header "X-Apigee.Host: prod-api.bancoazteca.com:9001" 'https://10.80.122.124:8443/oauth2/v1/token?grant_type=client_credentials' -H 'Content-Type: application/x-www-form-urlencoded' -d 'grant_type=client_credentials'
+    curl --noproxy "*" -k -u XEy1CtmrLRBSoIO4yvpJoUIotW4ZTUWx:SXGR2xIrRdnfYlEO --header "X-Apigee.Host: prod-api.bancoazteca.com:9001" 'https://10.80.122.125:8443/oauth2/v1/token?grant_type=client_credentials' -H 'Content-Type: application/x-www-form-urlencoded' -d 'grant_type=client_credentials'
+    curl --noproxy "*" -k -u XEy1CtmrLRBSoIO4yvpJoUIotW4ZTUWx:SXGR2xIrRdnfYlEO --header "X-Apigee.Host: prod-api.bancoazteca.com:9001" 'https://10.80.122.126:8443/oauth2/v1/token?grant_type=client_credentials' -H 'Content-Type: application/x-www-form-urlencoded' -d 'grant_type=client_credentials'
+    curl --noproxy "*" -k -u XEy1CtmrLRBSoIO4yvpJoUIotW4ZTUWx:SXGR2xIrRdnfYlEO --header "X-Apigee.Host: prod-api.bancoazteca.com:9001" 'https://10.80.122.127:8443/oauth2/v1/token?grant_type=client_credentials' -H 'Content-Type: application/x-www-form-urlencoded' -d 'grant_type=client_credentials'
+    curl --noproxy "*" -k -u XEy1CtmrLRBSoIO4yvpJoUIotW4ZTUWx:SXGR2xIrRdnfYlEO --header "X-Apigee.Host: prod-api.bancoazteca.com:9001" 'https://10.80.122.128:8443/oauth2/v1/token?grant_type=client_credentials' -H 'Content-Type: application/x-www-form-urlencoded' -d 'grant_type=client_credentials'
+    curl --noproxy "*" -k -u XEy1CtmrLRBSoIO4yvpJoUIotW4ZTUWx:SXGR2xIrRdnfYlEO --header "X-Apigee.Host: prod-api.bancoazteca.com:9001" 'https://10.80.122.129:8443/oauth2/v1/token?grant_type=client_credentials' -H 'Content-Type: application/x-www-form-urlencoded' -d 'grant_type=client_credentials'
+    curl --noproxy "*" -k -u XEy1CtmrLRBSoIO4yvpJoUIotW4ZTUWx:SXGR2xIrRdnfYlEO --header "X-Apigee.Host: prod-api.bancoazteca.com:9001" 'https://10.80.122.130:8443/oauth2/v1/token?grant_type=client_credentials' -H 'Content-Type: application/x-www-form-urlencoded' -d 'grant_type=client_credentials'
+
+
+comando para matar procesos del usuario Apigee
+    ps -fea |grep '^apigee' | awk '{print $2}' | xargs kill -9
+
+
+
+
+

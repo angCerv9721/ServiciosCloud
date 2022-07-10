@@ -54,3 +54,59 @@ lo que contenga
 #Comprimir zip con passwd
     zip -er archivo.zip archivo
 
+#Subir y bajar los iptables
+    service iptables stop
+    service iptables start
+    service iptables status
+
+#Comando para liberar swap
+    swapoff -a && swapon -a
+
+
+==============================================================
+#Curl para saber donde no se deployo una api en los routers
+#Esto lo coupamos cuando api no fue bien deployada, y queremos saber
+#en cual MP no fue deploya
+#Este curl me va a regredar un uUID del MP donde no fue deployada
+
+curl -k -v -u user:pass -X GET 'https://IP:8443/v1/organizations/baz-prod/environments/prod-ext/apis/API/revisions/revision/deployments'
+
+#Este comando me regresa un uUID, a partir de esto ocupo 
+#ocupo el siguiente curl para obtener la IP de MP 
+curl -u user:pass -X GET http://localhost:8080/v1/servers/uUID
+==============================================================
+
+
+
+
+
+
+#Dar permisos a un usuario o grupo en particula sobre un archivo
+    setfacl -Rm u:user:rX archivo 
+    setfacl -Rm g:grupo:rX archivo 
+
+#ver los permissos de los usuarios sobre el archivo 
+    getfacl archivo 
+
+
+#Habilitar puerto , si no tengo conexion, es porque el puerto puede estar abajo
+    nc -l puerto 
+
+#Comando para ver la cabecera de un disco
+    sudo strings  /dev/sda4 | head
+
+
+
+==================================================================
+#El servicio chronyd.service es el encargado de la sincronizacion 
+    systemctl status chronyd.service
+    Ruta: cat /etc/chrony.conf #Archivo de configuracion
+    chronyc source  #Comando para realiza sincronia
+
+#Puerto NTP 123 para las cuestiones de sincronia
+    timedatectl status #Verifico lo relacionado con fecha 
+    timedatectl set-time '' #comando para la modificacion de fecha
+
+==================================================================
+
+

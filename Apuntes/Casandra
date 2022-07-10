@@ -1,0 +1,32 @@
+===========================================================
+                Mantenimiento Cassandra
+===========================================================
+Cassandra es una basa de datos no SQL, donde las Apis tienen su base de datos
+Los respaldos se realizan unicamente los Lunes,Martes y Miercoles a partir de las 11 PM
+
+
+#Realizar las tareas de mantenimiento de los nodos Cassandra con el siguiente comando:
+    /opt/apigee/apigee-cassandra/bin/nodetool -h localhost repair -pr
+
+#Validar con los siguientes comandos
+    /opt/apigee/apigee-cassandra/bin/nodetool status  
+    /opt/apigee/apigee-cassandra/bin/nodetool ring
+    /opt/apigee/apigee-cassandra/bin/nodetool compactionstats
+    /opt/apigee/apigee-cassandra/bin/nodetool netstats
+
+#Validar el log
+    tail -f /opt/apigee/var/log/apigee-cassandra/system.log
+
+#Validar con un watch los siguientes comandos
+    /opt/apigee/apigee-cassandra/bin/nodetool status
+    /opt/apigee/apigee-cassandra/bin/nodetool ring
+
+#Cuando casandra falla
+    /opt/apigee/apigee-service/bin/apigee-service apigee-cassandra status
+    /opt/apigee/apigee-service/bin/apigee-service apigee-cassandra start
+
+       Cassandra CDMX                         Casandra KIO 
+mxcaszooapigee01  10.53.58.102     kiocaszooapigee01  10.80.122.113
+mxcaszooapigee02  10.53.58.103     kiocaszooapigee02  10.80.122.114
+mxcaszooapigee03  10.53.58.104     kiocaszooapigee03  10.80.122.115
+
