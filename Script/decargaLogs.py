@@ -36,25 +36,37 @@ class DescargaLogs:
         return x.get()
 
     def Logs_OnPremise(self):
-        Ambiente=self.Obtener_Datos(self.ent1)
-        Api=self.Obtener_Datos(self.ent2)
-        Revision=self.Obtener_Datos(self.ent3)
-        Fecha=self.Obtener_Datos(self.ent4)
+        Ambiente=self.Obtener_Datos(self.ent1).replace(" ","")
+        Api=self.Obtener_Datos(self.ent2).replace(" ","")
+        Revision=self.Obtener_Datos(self.ent3).replace(" ","")
+        Fecha=self.Obtener_Datos(self.ent4).replace(" ","")
+        Ruta='/opt/apigee/var/log/edge-message-processor/messagelogging/baz-prod/'+Ambiente+'/'+Api+'/'+Revision+'/'   
+        #Cualuier Nodo para Validacion de ruta
+        Salida=os.popen('sshpass -p "operacionesCLOUD" ssh b1014515@10.80.122.116 "if test -d '+Ruta+'; then echo "OK"; fi"').read().rstrip()
+        if Salida:
+            print ("SIu")
+            for i in range(5,20):
+                if not i is 15:
+                    print (i)
+            print ("KIO")
+            for i in range(16,31):
+                print (i)
+
 
     def Log_AWS(self):
-        Ambiente=self.Obtener_Datos(self.ent1)
-        Api=self.Obtener_Datos(self.ent2)
-        Revision=self.Obtener_Datos(self.ent3)
-        Fecha=self.Obtener_Datos(self.ent4)
+        Ambiente=self.Obtener_Datos(self.ent1).replace(" ","")
+        Api=self.Obtener_Datos(self.ent2).replace(" ","")
+        Revision=self.Obtener_Datos(self.ent3).replace(" ","")
+        Fecha=self.Obtener_Datos(self.ent4).replace(" ","")
 
 
     def Logs_Tibco(self):
-        Ruta=self.Obtener_Datos(self.ent1)
+        Ruta=self.Obtener_Datos(self.ent1).replace(" ","")
 
     
     def Logs_BeneficiosFinancieros(self):
-        Microservicio=self.Obtener_Datos(self.ent1)
-        Fecha=self.Obtener_Datos(self.ent2)
+        Microservicio=self.Obtener_Datos(self.ent1).replace(" ","")
+        Fecha=self.Obtener_Datos(self.ent2).replace(" ","")
 
 
     def OnPremise(self):
@@ -77,7 +89,7 @@ class DescargaLogs:
             self.ent4=tk.Entry(self.vchild, width=60)
             self.ent4.grid(padx=10, pady=10, row=4, column=1)
             self.Boton=tk.Button(self.vchild,text="Descargar",command=self.Logs_OnPremise)
-            self.Boton.grid(padx=10, pady=10, row=5, column=0)    
+            self.Boton.grid(padx=10, pady=10, row=5, column=0)  
 
 
     def AWs(self):
@@ -99,7 +111,7 @@ class DescargaLogs:
             self.ent3.grid(padx=10, pady=10, row=3, column=1)
             self.ent4=tk.Entry(self.vchild, width=60)
             self.ent4.grid(padx=10, pady=10, row=4, column=1)
-            self.Boton=tk.Button(self.vchild,text="Descargar")
+            self.Boton=tk.Button(self.vchild,text="Descargar", command=self.Log_AWS)
             self.Boton.grid(padx=10, pady=10, row=5, column=0)    
 
 
@@ -116,7 +128,7 @@ class DescargaLogs:
             self.ent1.grid(padx=10, pady=10, row=1, column=1)
             self.ent2=tk.Entry(self.vchild, width=30)
             self.ent2.grid(padx=10, pady=10, row=2, column=1)
-            self.Boton=tk.Button(self.vchild,text="Descargar")
+            self.Boton=tk.Button(self.vchild,text="Descargar",command=self.Logs_BeneficiosFinancieros)
             self.Boton.grid(padx=10, pady=10, row=5, column=0) 
 
 
@@ -130,7 +142,7 @@ class DescargaLogs:
             tk.Label(self.vchild, text="Ruta: ").grid(padx=10, pady=10, row=1, column=0)
             self.ent1=tk.Entry(self.vchild, width=60)
             self.ent1.grid(padx=10, pady=10, row=1, column=1)
-            self.Boton=tk.Button(self.vchild,text="Descargar")
+            self.Boton=tk.Button(self.vchild,text="Descargar",command=self.Logs_Tibco)
             self.Boton.grid(padx=10, pady=10, row=5, column=0) 
                
 
