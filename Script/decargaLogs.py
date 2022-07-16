@@ -43,20 +43,16 @@ class DescargaLogs:
         Fecha=self.Obtener_Datos(self.ent4).replace(" ","")
         Ruta='/opt/apigee/var/log/edge-message-processor/messagelogging/baz-prod/'+Ambiente+'/'+Api+'/'+Revision+'/'   
         #Validacion de ruta con un nodo cualquiera
-        Salida=os.popen('sshpass -p "operacionesCLOUD" ssh b1014515@10.80.122.116 "if test -d '+Ruta+'; then echo "OK"; fi"').read().rstrip()
-        if Salida:
-            for i in range(105,120):
-                if not i is 115:
-                    print("Conexion "+str(i))
-                    os.system('sshpass -p "operacionesCLOUD" ssh -o "StrictHostKeyChecking=no" b1014515@10.53.58.'+str(i)+' cat '+Ruta+'ML-Logging-Archivo-Info/* | egrep -A6 '+Fecha+' > Logs_Info_'+str(i)+'_'+Fecha+'')
-                    os.system('sshpass -p "operacionesCLOUD" ssh -o "StrictHostKeyChecking=no" b1014515@10.53.58.'+str(i)+' cat '+Ruta+'ML-Logging-Archivo-Error/* | egrep -A6 '+Fecha+' > Logs_Error_'+str(i)+'_'+Fecha+'')
-            for i in range(116,131):
-                    print ("Conexion "+i)
-                    os.system('sshpass -p "operacionesCLOUD" ssh -o "StrictHostKeyChecking=no" b1014515@10.80.122.'+str(i)+' cat '+Ruta+'ML-Logging-Archivo-Info/* | egrep -A6 '+Fecha+' > Logs_Info_'+str(i)+'_'+Fecha+'')
-                    os.system('sshpass -p "operacionesCLOUD" ssh -o "StrictHostKeyChecking=no" b1014515@10.80.122.'+str(i)+' cat '+Ruta+'ML-Logging-Archivo-Error/* | egrep -A6 '+Fecha+' > Logs_Error_'+str(i)+'_'+Fecha+'')
-        else:
-            print ("Funcion para la validacion de ruta")
-
+        MP_Onpremise=["10.53.58.105","10.53.58.106","10.53.58.107","10.53.58.108","10.53.58.109","10.53.58.110","10.53.58.111","10.53.58.112","10.53.58.113","10.53.58.114","10.53.58.116","10.53.58.117","10.53.58.118","10.53.58.119","10.80.122.116","10.80.122.117","10.80.122.118","10.80.122.119","10.80.122.120","10.80.122.121","10.80.122.122","10.80.122.123","10.80.122.124","10.80.122.125","10.80.122.126","10.80.122.127","10.80.122.128","10.80.122.129","10.80.122.130"]
+        for i in MP_Onpremise:
+            Salida=os.popen('sshpass -p "operacionesCLOUD" ssh b1014515@'+i+' "if test -d '+Ruta+'; then echo "OK"; fi"').read().rstrip()
+            if Salida:
+                print("Conexion "+i)
+                os.system('sshpass -p "operacionesCLOUD" ssh -o "StrictHostKeyChecking=no" b1014515@'+i+' cat '+Ruta+'ML-Logging-Archivo-Info/* | egrep -A6 '+Fecha+' > Logs_Info_'+i+'_'+Fecha+'')
+                os.system('sshpass -p "operacionesCLOUD" ssh -o "StrictHostKeyChecking=no" b1014515@'+i+' cat '+Ruta+'ML-Logging-Archivo-Error/* | egrep -A6 '+Fecha+' > Logs_Error_'+i+'_'+Fecha+'')
+            else:
+                print ("Funcion para la validacion de ruta")
+                break
 
 
     def Log_AWS(self):
@@ -65,14 +61,15 @@ class DescargaLogs:
         Revision=self.Obtener_Datos(self.ent3).replace(" ","")
         Fecha=self.Obtener_Datos(self.ent4).replace(" ","")
         Ruta='/opt/apigee/var/log/edge-message-processor/messagelogging/baz-prod/'+Ambiente+'/'+Api+'/'+Revision+'/' 
-        Salida=os.popen('ssh -i ./APIGEE-PROD-KPS.pem ec2-user@10.96.65.40 "if test -d '+Ruta+'; then echo "OK"; fi"').read().rstrip()
-        if Salida:
-            for j in range(38,41):
-                print("Conexion "+str(+j))
-                os.system('ssh -i ./APIGEE-PROD-KPS.pem ec2-user@10.96.65.'+str(j)+' cat '+Ruta+'ML-Logging-Archivo-Info/* | egrep -A6 '+Fecha+' > Logsaws_Info_'+str(j)+'_'+Fecha+'')
-                os.system('ssh -i ./APIGEE-PROD-KPS.pem ec2-user@10.96.65.'+str(j)+' cat '+Ruta+'ML-Logging-Archivo-Error/* | egrep -A6 '+Fecha+' > Logsaws_Error_'+str(j)+'_'+Fecha+'')
-        else:
-            print ("Funcion para la validacion de ruta")
+        MP_AWS=["10.96.65.38","10.96.65.39","10.96.65.40"]
+        for i in MP_AWS:
+            Salida=os.popen('ssh -i ./APIGEE-PROD-KPS.pem ec2-user@'+i+' "if test -d '+Ruta+'; then echo "OK"; fi"').read().rstrip()
+            if Salida:
+                os.system('ssh -i ./APIGEE-PROD-KPS.pem ec2-user@'+i+' cat '+Ruta+'ML-Logging-Archivo-Info/* | egrep -A6 '+Fecha+' > Logsaws_Info_'+i+'_'+Fecha+'')
+                os.system('ssh -i ./APIGEE-PROD-KPS.pem ec2-user@'+i+' cat '+Ruta+'ML-Logging-Archivo-Error/* | egrep -A6 '+Fecha+' > Logsaws_Error_'+i+'_'+Fecha+'')
+            else:
+                print ("Funcion para la validacion de ruta")
+                break
 
 
     def Logs_Tibco(self):
