@@ -65,6 +65,7 @@ class DescargaLogs:
         for i in MP_AWS:
             Salida=os.popen('ssh -i ./APIGEE-PROD-KPS.pem ec2-user@'+i+' "if test -d '+Ruta+'; then echo "OK"; fi"').read().rstrip()
             if Salida:
+                print("Conexion "+i)
                 os.system('ssh -i ./APIGEE-PROD-KPS.pem ec2-user@'+i+' cat '+Ruta+'ML-Logging-Archivo-Info/* | egrep -A6 '+Fecha+' > Logsaws_Info_'+i+'_'+Fecha+'')
                 os.system('ssh -i ./APIGEE-PROD-KPS.pem ec2-user@'+i+' cat '+Ruta+'ML-Logging-Archivo-Error/* | egrep -A6 '+Fecha+' > Logsaws_Error_'+i+'_'+Fecha+'')
             else:
