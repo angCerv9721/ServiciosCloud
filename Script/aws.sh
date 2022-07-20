@@ -1,34 +1,34 @@
 #!/bin/bash
-#Funciona para la descarga de logs de los MP 
+#Funciona para la descarga de logs de los MP_AWS 
 #Lista de message para la conexion
-MP[1]='10.96.65.38'
-MP[2]='10.96.65.39'
-MP[3]='10.96.65.40'
+MP_AWS[1]='10.96.65.38'
+MP_AWS[2]='10.96.65.39'
+MP_AWS[3]='10.96.65.40'
 PEM=`find . -name APIGEE-PROD-KPS.pem`
 
 
 #Funcion para la validacion de la ruta antes de la descarga
-valida_ruta(){
+valida_ruta_AWS(){
     echo `ssh -i $PEM ec2-user@$1 "if test -d $Ruta; then echo "OK";  fi"` 
 }
 
 #Funcion para la descarga de logs
-Descarga_Logs(){
+Descarga_Logs_AWS(){
     ssh -i $PEM ec2-user@$1 "cat $Ruta/ML-Logging-Archivo-Error/* | egrep -A6 $Fecha" > /home/$user/Log_$Api\_$Ambiente/Logs_Error_$Ambiente\_$Fecha\_$1.txt
     ssh -i $PEM ec2-user@$1 "cat $Ruta/ML-Logging-Archivo-Info/* | egrep -A6 $Fecha" > /home/$user/Log_$Api\_$Ambiente/Logs_Info_$Ambiente\_$Fecha\_$1.txt
 }
 
 #Funcion para la lectura del arreglo
 Read_Array(){
-    for i in `seq  1 ${#MP[@]}`
+    for i in `seq  1 ${#MP_AWS[@]}`
     do
         echo "=============================="
-        echo "   Conexion ${MP[$i]}"
+        echo "   Conexion ${MP_AWS[$i]}"
         echo "=============================="
         echo ""
-        if [ `valida_ruta "${MP[$i]}"` ]
+        if [ `valida_ruta_AWS "${MP_AWS[$i]}"` ]
         then
-            Descarga_Logs "${MP[$i]}"
+            Descarga_Logs_AWS "${MP_AWS[$i]}"
         else
             echo ""
             echo "Valida la ruta: $Ruta"
