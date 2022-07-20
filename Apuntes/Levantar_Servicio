@@ -1,0 +1,18 @@
+==========================================
+            Generar servicio
+==========================================
+Levantar un servicio en SUSE lo hacemos a partir de un script 
+1. Podemos colocarlo en la ruta recomiendo la siguiente:
+    Ruta:/usr/bin/
+el servicio puede ser un scrip .sh o .service
+
+2. Se genera el servicio en la siguiente ruta: /etc/systemd/system/
+    > nombre.service
+
+3. Levantamos el servicio
+    systemctl enable nombre.service
+    systemctl start nombre.service
+
+
+
+

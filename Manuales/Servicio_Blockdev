@@ -1,0 +1,38 @@
+===============================================
+    Crear un servicio blockdev para mongo
+===============================================
+1. Es necesario crear un Script
+    Ruta:/usr/bin/readahead.service
+
+2. Generar el siguiente script 
+///////////////////////////////////    
+#!/bin/bash
+/sbin/blockdev --setra 8/dev/sdc 
+//////////////////////////////////
+
+3.Configurar permisos para la ejecuacion del script: chmod +x /usr/bin/readahead.service
+4. Configurar el servicio en la siguiente ruta: /etc/systemd/system/
+5. Creamos un archivo con el nombre del servicio: > readahead.service
+
+6. Configuracion del archivo de servicio
+/////////////////////////////////////////////////////////////
+[Unit]
+Description=Description for sample script goes here
+After=network.target
+[Service]
+Type=simple
+ExecStart=/usr/bin/readahead.service
+TimeoutStartSec=0
+[Install]
+WantedBy=default.target
+////////////////////////////////////////////////////////////
+
+7. Reinicio de los demonios : systemctl daemon-reload
+8. Habilitar el servicio e iniciar el servicio 
+    systemctl enable readahead.service
+    systemctl start readahead.service
+
+
+Para la validacion se tienen los comandos
+    blockdev --getra /dev/sdc
+    blockdev --report
