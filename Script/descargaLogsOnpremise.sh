@@ -42,9 +42,9 @@ valida_ruta_Onp(){
     echo `sshpass -p "operacionesCLOUD" ssh  -o "StrictHostKeyChecking=no" b1014515@$1 "if test -d $Ruta; then echo "OK"; fi"` 
 }
 valida_ruta_AWS(){
+    PEM=`find /home/$user/ -name APIGEE-PROD-KPS.pem`
     echo `ssh -i $PEM ec2-user@$1 "if test -d $Ruta; then echo "OK";  fi"` 
 }
-
 
 #Funcion para la descarga de logs
 Descarga_Logs_Onpremise(){
@@ -70,11 +70,12 @@ Read_Array_Onp(){
             Descarga_Logs_Onpremise "${MP_Onp[$i]}"
         else
             echo ""
-            echo "Valida la ruta: $Ruta"
+            echo "$(tput setaf 1)Valida la ruta: $Ruta"
             echo ""
         fi 
     done
 }
+
 Read_Array_AWS(){
     for i in `seq  1 ${#MP_AWS[@]}`
     do
@@ -87,7 +88,7 @@ Read_Array_AWS(){
             Descarga_Logs_AWS "${MP_AWS[$i]}"
         else
             echo ""
-            echo "Valida la ruta: $Ruta"
+            echo "$(tput setaf 1)Valida la ruta: $Ruta"
             echo ""
         fi 
     done
@@ -98,7 +99,6 @@ Directorio(){
     user=`whoami`
     rm -rf /home/$user//Log_$Api\_$Ambiente/
     mkdir /home/$user//Log_$Api\_$Ambiente/
-    PEM=`find /home/$user/ -name APIGEE-PROD-KPS.pem`
 }
 
 #Menu principal e interactivo
@@ -132,9 +132,8 @@ main (){
     Directorio
     case $Planeta in
         aws) Read_Array_AWS;;
-        onp) Read_Array_Onp;; 
+        onp) Read_Array_Onp;;
+        *) echo "Opcion invalida: \"$Planeta\""
     esac
-   
 }
-
 main
